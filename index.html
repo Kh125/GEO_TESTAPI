@@ -1,0 +1,31 @@
+<html>
+  <head>
+    <title>Distance Matrix Service</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+    <link rel="stylesheet" type="text/css" href="./style.css" />
+    <script type="module" src="./index.js"></script>
+  </head>
+  <body>
+    <div id="container">
+      <div id="message"></div>
+    </div>
+
+    <script>
+      // Define your API key as a JavaScript variable
+      const apiKey = 'AIzaSyAKA2DT4Vsjt7sW0Ts8eTRNn5qgQUsq75s';
+
+      // Function to initialize the map
+      function createSRC() {
+        // Use the apiKey variable when loading the Google Maps API
+        const script = document.createElement('script');
+        script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&callback=initMap&v=weekly`;
+        script.defer = true;
+        document.body.appendChild(script);
+      }
+
+      // Call the initMap function
+      createSRC();
+    </script>
+  </body>
+</html>
