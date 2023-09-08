@@ -12,6 +12,30 @@
 
     <script type="module">
       // Define your API key as a JavaScript variable
+      
+      if('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('./sw.js')
+        .then((registration) => {
+            console.log("Service Worker is registered successfully!")
+            requestNotificationPermission(registration)
+        })
+        .catch((err) => console.log("Service Worker not register.", err))
+      }
+
+      function requestNotificationPermission(registration) {
+        if ('Notification' in window) {
+          Notification.requestPermission().then(function (permission) {
+            if (permission === 'granted') {
+              // User granted permission, send a message to the service worker to subscribe the user
+              if (registration.active) {
+                registration.active.postMessage({ action: 'subscribeUser' });
+              }
+
+              console.log("Notification Permission Granted!");
+            }
+          });
+        }
+      }
       const apiKey = 'AIzaSyAKA2DT4Vsjt7sW0Ts8eTRNn5qgQUsq75s';
 
       function initMap() {
